@@ -1,0 +1,35 @@
+name: Run Predictions
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-predictions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas plotly requests
+
+      - name: Run Prediction Script
+        run: |
+          python your_script_name.py  # Replace with your script filename
+
+      - name: Upload Prediction Charts
+        uses: actions/upload-artifact@v3
+        with:
+          name: prediction-charts
+          path: "*.html"
