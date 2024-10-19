@@ -26,7 +26,7 @@ jobs:
 
       - name: Run Prediction Script
         run: |
-          python your_script_name.py  # Replace with your script filename
+          python predict.py  # Replace with your script filename
 
       - name: Upload Prediction Charts
         uses: actions/upload-artifact@v3
