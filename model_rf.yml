@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Checkout your repository
+        uses: actions/checkout@v2  # Checkout your repository
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.8'  # Specify the Python version you need
 
