@@ -48,11 +48,9 @@
             fetch(chartUrl)
                 .then(response => response.text())
                 .then(data => {
-                    // Create a temporary DOM element to parse the fetched HTML
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = data;
                     
-                    // Extract the chart container from the fetched HTML
                     const chartDiv = tempDiv.querySelector('#chart'); // Ensure each chart has a unique ID
                     if (chartDiv) {
                         chartContainer.appendChild(chartDiv); // Append the chart div to the container
@@ -61,6 +59,7 @@
                     }
                 })
                 .catch(error => {
+                    console.error('Fetch error:', error); // Log error to the console
                     chartContainer.innerHTML = `<p>Error loading chart: ${error.message}</p>`;
                 });
         }
