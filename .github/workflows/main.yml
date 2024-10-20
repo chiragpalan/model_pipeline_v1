@@ -1,0 +1,45 @@
+name: Train and Predict
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy scikit-learn joblib plotly
+
+      - name: Run model training and prediction
+        run: python train_and_predict.py  # Your script's name
+
+      - name: Commit and push models and HTML files
+        run: |
+          git config --local user.email "you@example.com"
+          git config --local user.name "Your Name"
+          git add models/*.pkl *.html
+          git commit -m "Update models and HTML files"
+          git push
+
+      - name: Update README with links to HTML files
+        run: |
+          for file in *.html; do
+            echo "![${file%.html}](./$file)" >> README.md
+          done
+          git add README.md
+          git commit -m "Update README with HTML links"
+          git push
