@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combined Predictions Charts</title>
+    <title>Combined Interactive Charts</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         /* Optional styling */
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<h1>Interactive Predictions Chart Selector</h1>
+<h1>Interactive Chart Selector</h1>
 <select id="chart-dropdown" onchange="updateChart()">
     <option value="">Select a chart</option>
     <option value="nifty">Nifty Data Predictions</option>
@@ -48,17 +48,14 @@
             fetch(chartUrl)
                 .then(response => response.text())
                 .then(data => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(data, "text/html");
-                    const chartDiv = doc.getElementById("chart"); // Assuming your charts have an ID "chart"
+                    // Create a temporary DOM element to parse the fetched HTML
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = data;
                     
+                    // Extract the chart container from the fetched HTML
+                    const chartDiv = tempDiv.querySelector('#chart'); // Ensure each chart has a unique ID
                     if (chartDiv) {
                         chartContainer.appendChild(chartDiv); // Append the chart div to the container
-                        // Evaluate any scripts if needed (like Plotly.render())
-                        const scriptTags = doc.getElementsByTagName("script");
-                        for (let i = 0; i < scriptTags.length; i++) {
-                            eval(scriptTags[i].innerText); // This will execute the script content
-                        }
                     } else {
                         chartContainer.innerHTML = "<p>Error loading chart.</p>";
                     }
