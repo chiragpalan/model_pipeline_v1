@@ -8,7 +8,7 @@
 # Predictions and Charts
 
 ## Chart for Table 1
-[View Interactive Chart for Table 1](https://yourusername.github.io/model_pipeline_v1/nifty_data_predictions.html)
+[View Interactive Chart for Table 1](https://chiragpalan.github.io/model_pipeline_v1/nifty_data_predictions.html)
 
 ## Chart for Table 2
 [View Interactive Chart for Table 2](https://yourusername.github.io/your-repo-name/table2_predictions.html)
