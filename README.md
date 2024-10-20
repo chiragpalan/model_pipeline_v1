@@ -11,11 +11,8 @@
 [View Interactive Chart for Table 1](https://chiragpalan.github.io/model_pipeline_v1/nifty_data_predictions.html)
 
 ## Chart for Table 2
-[View Interactive Chart for Table 2](https://yourusername.github.io/your-repo-name/table2_predictions.html)
+[View Interactive Chart for Table 2](https://chiragpalan.github.io/model_pipeline_v1/reliance_data_predictions.html)
 
-## More Charts
-See the complete list of charts [here](https://yourusername.github.io/your-repo-name/index.html).
-![index](./index.html)
-![nifty_data_predictions](./nifty_data_predictions.html)
-![reliance_data_predictions](./reliance_data_predictions.html)
-![tcs_data_predictions](./tcs_data_predictions.html)
+## Chart for Table 3
+[View Interactive Chart for Table 3](https://chiragpalan.github.io/model_pipeline_v1/tcs_data_predictions.html)
+
