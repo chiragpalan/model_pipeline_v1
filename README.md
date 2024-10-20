@@ -8,6 +8,9 @@
 
 ## Chart for tcs_data_predictions
 [View Interactive Chart for Table 3](https://chiragpalan.github.io/model_pipeline_v1/tcs_data_predictions.html)
+
+[View Interactive Chart for Table 3](https://chiragpalan.github.io/model_pipeline_v1/comb.html)
+
 ![comb](./comb.html)
 ![index1](./index1.html)
 ![index2](./index2.html)
