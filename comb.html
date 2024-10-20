@@ -35,30 +35,37 @@
 
         chartContainer.innerHTML = ""; // Clear the container before updating
 
+        let chartUrl;
         if (chartType === "nifty") {
-            // Load the content of the nifty data predictions chart
-            fetch("https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/nifty_data_predictions.html")
-                .then(response => response.text())
-                .then(data => {
-                    chartContainer.innerHTML = data;
-                })
-                .catch(error => console.error('Error loading nifty data predictions:', error));
+            chartUrl = "https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/nifty_data_predictions.html";
         } else if (chartType === "reliance") {
-            // Load the content of the reliance data predictions chart
-            fetch("https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/reliance_data_predictions.html")
-                .then(response => response.text())
-                .then(data => {
-                    chartContainer.innerHTML = data;
-                })
-                .catch(error => console.error('Error loading reliance data predictions:', error));
+            chartUrl = "https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/reliance_data_predictions.html";
         } else if (chartType === "tcs") {
-            // Load the content of the TCS data predictions chart
-            fetch("https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/tcs_data_predictions.html")
+            chartUrl = "https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/tcs_data_predictions.html";
+        }
+
+        if (chartUrl) {
+            fetch(chartUrl)
                 .then(response => response.text())
                 .then(data => {
-                    chartContainer.innerHTML = data;
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, "text/html");
+                    const chartDiv = doc.getElementById("chart"); // Assuming your charts have an ID "chart"
+                    
+                    if (chartDiv) {
+                        chartContainer.appendChild(chartDiv); // Append the chart div to the container
+                        // Evaluate any scripts if needed (like Plotly.render())
+                        const scriptTags = doc.getElementsByTagName("script");
+                        for (let i = 0; i < scriptTags.length; i++) {
+                            eval(scriptTags[i].innerText); // This will execute the script content
+                        }
+                    } else {
+                        chartContainer.innerHTML = "<p>Error loading chart.</p>";
+                    }
                 })
-                .catch(error => console.error('Error loading TCS data predictions:', error));
+                .catch(error => {
+                    chartContainer.innerHTML = `<p>Error loading chart: ${error.message}</p>`;
+                });
         }
     }
 </script>
