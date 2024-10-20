@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Charts</title>
+    <script>
+        function showChart() {
+            var chartSelector = document.getElementById("chartSelector");
+            var selectedChart = chartSelector.options[chartSelector.selectedIndex].value;
+            var iframes = document.getElementsByClassName("chart");
+            for (var i = 0; i < iframes.length; i++) {
+                iframes[i].style.display = "none"; // Hide all charts
+            }
+            document.getElementById(selectedChart).style.display = "block"; // Show selected chart
+        }
+    </script>
+    <style>
+        .chart {
+            display: none; /* Hide all charts by default */
+            width: 100%; /* Responsive */
+            height: 600px; /* Adjust height as needed */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Select a Chart to View</h1>
+<select id="chartSelector" onchange="showChart()">
+    <option value="chart1">Table 1 Predictions</option>
+    <option value="chart2">Table 2 Predictions</option>
+    <option value="chart3">Table 3 Predictions</option>
+    <!-- Add more options for each chart -->
+</select>
+
+<iframe id="chart1" class="chart" src="table1_predictions.html"></iframe>
+<iframe id="chart2" class="chart" src="table2_predictions.html"></iframe>
+<iframe id="chart3" class="chart" src="table3_predictions.html"></iframe>
+<!-- Add more iframes for each chart -->
+
+<script>
+    // Show the first chart by default
+    document.getElementById("chart1").style.display = "block";
+</script>
+
+</body>
+</html>
