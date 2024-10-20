@@ -16,9 +16,12 @@
 ## Chart for reliance_data_predictions
 [View Interactive Chart for Table 3](https://chiragpalan.github.io/model_pipeline_v1/reliance_data_predictions.html)
 
-
 ## Chart for tcs_data_predictions
 [View Interactive Chart for Table 3](https://chiragpalan.github.io/model_pipeline_v1/tcs_data_predictions.html)
+
+[View Interactive Chart for comb 3](https://chiragpalan.github.io/model_pipeline_v1/comb.html)
+
+
 ![index](./index.html)
 ![nifty_data_predictions](./nifty_data_predictions.html)
 ![reliance_data_predictions](./reliance_data_predictions.html)
