@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Predictions Charts</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        /* Optional styling */
+        #chart-container {
+            width: 100%;
+            height: 600px;
+        }
+        #chart-dropdown {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Interactive Predictions Chart Selector</h1>
+<select id="chart-dropdown" onchange="updateChart()">
+    <option value="">Select a chart</option>
+    <option value="nifty">Nifty Data Predictions</option>
+    <option value="reliance">Reliance Data Predictions</option>
+    <option value="tcs">TCS Data Predictions</option>
+</select>
+
+<div id="chart-container"></div>
+
+<script>
+    function updateChart() {
+        const chartType = document.getElementById("chart-dropdown").value;
+        const chartContainer = document.getElementById("chart-container");
+
+        chartContainer.innerHTML = ""; // Clear the container before updating
+
+        if (chartType === "nifty") {
+            // Load the content of the nifty data predictions chart
+            fetch("https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/nifty_data_predictions.html")
+                .then(response => response.text())
+                .then(data => {
+                    chartContainer.innerHTML = data;
+                })
+                .catch(error => console.error('Error loading nifty data predictions:', error));
+        } else if (chartType === "reliance") {
+            // Load the content of the reliance data predictions chart
+            fetch("https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/reliance_data_predictions.html")
+                .then(response => response.text())
+                .then(data => {
+                    chartContainer.innerHTML = data;
+                })
+                .catch(error => console.error('Error loading reliance data predictions:', error));
+        } else if (chartType === "tcs") {
+            // Load the content of the TCS data predictions chart
+            fetch("https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/tcs_data_predictions.html")
+                .then(response => response.text())
+                .then(data => {
+                    chartContainer.innerHTML = data;
+                })
+                .catch(error => console.error('Error loading TCS data predictions:', error));
+        }
+    }
+</script>
+
+</body>
+</html>
