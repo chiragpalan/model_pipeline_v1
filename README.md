@@ -1,5 +1,3 @@
-![index](./index.html)
-
 # Predictions and Charts
 
 ## Chart for nifty_data_predictions
