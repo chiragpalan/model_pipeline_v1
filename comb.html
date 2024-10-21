@@ -3,68 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combined Interactive Charts</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Combined Charts</title>
     <style>
-        /* Optional styling */
-        #chart-container {
-            width: 100%;
-            height: 600px;
+        body {
+            font-family: Arial, sans-serif;
         }
-        #chart-dropdown {
-            margin-bottom: 20px;
+        select {
+            margin: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
         }
     </style>
 </head>
 <body>
 
-<h1>Interactive Chart Selector</h1>
-<select id="chart-dropdown" onchange="updateChart()">
-    <option value="">Select a chart</option>
-    <option value="nifty">Nifty Data Predictions</option>
-    <option value="reliance">Reliance Data Predictions</option>
-    <option value="tcs">TCS Data Predictions</option>
-</select>
+    <h1>Select Chart</h1>
+    <select id="chartSelector">
+        <option value="">-- Select a Chart --</option>
+        <option value="nifty_data_predictions.html">Nifty Data Predictions</option>
+        <option value="reliance_data_predictions.html">Reliance Data Predictions</option>
+        <option value="tcs_data_predictions.html">TCS Data Predictions</option>
+    </select>
 
-<div id="chart-container"></div>
+    <iframe id="chartFrame" src=""></iframe>
 
-<script>
-    function updateChart() {
-        const chartType = document.getElementById("chart-dropdown").value;
-        const chartContainer = document.getElementById("chart-container");
-
-        chartContainer.innerHTML = ""; // Clear the container before updating
-
-        let chartUrl;
-        if (chartType === "nifty") {
-            chartUrl = "https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/nifty_data_predictions.html";
-        } else if (chartType === "reliance") {
-            chartUrl = "https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/reliance_data_predictions.html";
-        } else if (chartType === "tcs") {
-            chartUrl = "https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/tcs_data_predictions.html";
-        }
-
-        if (chartUrl) {
-            fetch(chartUrl)
-                .then(response => response.text())
-                .then(data => {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = data;
-                    
-                    const chartDiv = tempDiv.querySelector('#chart'); // Ensure each chart has a unique ID
-                    if (chartDiv) {
-                        chartContainer.appendChild(chartDiv); // Append the chart div to the container
-                    } else {
-                        chartContainer.innerHTML = "<p>Error loading chart.</p>";
-                    }
-                })
-                .catch(error => {
-                    console.error('Fetch error:', error); // Log error to the console
-                    chartContainer.innerHTML = `<p>Error loading chart: ${error.message}</p>`;
-                });
-        }
-    }
-</script>
+    <script>
+        document.getElementById('chartSelector').addEventListener('change', function() {
+            const selectedChart = this.value;
+            const chartFrame = document.getElementById('chartFrame');
+            
+            if (selectedChart) {
+                chartFrame.src = `https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/${selectedChart}`;
+            } else {
+                chartFrame.src = "";
+            }
+        });
+    </script>
 
 </body>
 </html>
