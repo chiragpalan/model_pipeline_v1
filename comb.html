@@ -13,10 +13,14 @@
             padding: 10px;
             font-size: 16px;
         }
-        iframe {
+        #chartContainer {
+            margin-top: 20px;
             width: 100%;
             height: 80vh;
-            border: none;
+            overflow: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -30,17 +34,27 @@
         <option value="tcs_data_predictions.html">TCS Data Predictions</option>
     </select>
 
-    <iframe id="chartFrame" src=""></iframe>
+    <div id="chartContainer">Select a chart to display.</div>
 
     <script>
-        document.getElementById('chartSelector').addEventListener('change', function() {
+        const chartSelector = document.getElementById('chartSelector');
+        const chartContainer = document.getElementById('chartContainer');
+
+        chartSelector.addEventListener('change', async function () {
             const selectedChart = this.value;
-            const chartFrame = document.getElementById('chartFrame');
             
             if (selectedChart) {
-                chartFrame.src = `https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/${selectedChart}`;
+                try {
+                    const response = await fetch(`https://raw.githubusercontent.com/chiragpalan/model_pipeline_v1/main/${selectedChart}`);
+                    if (!response.ok) throw new Error('Failed to load chart.');
+                    
+                    const htmlContent = await response.text();
+                    chartContainer.innerHTML = htmlContent;
+                } catch (error) {
+                    chartContainer.innerHTML = `<p style="color: red;">Error loading chart: ${error.message}</p>`;
+                }
             } else {
-                chartFrame.src = "";
+                chartContainer.innerHTML = "Select a chart to display.";
             }
         });
     </script>
